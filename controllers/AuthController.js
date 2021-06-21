@@ -42,7 +42,7 @@ module.exports = {
                 }
             }
             return res.status(404).json({
-                message: 'Wrong e-mail or password' })
+                message: 'emaail ou senha errado' })
         })
     },
 
@@ -50,13 +50,13 @@ module.exports = {
         const token = req.get('Authorization');
 
         if (!token) {
-            return res.status(401).json({message: 'Token not found'});
+            return res.status(401).json({message: 'Token nao encontrado'});
         }
         jwt.verify(token, consts.keyJWT, 
             (err, decoded) => {
                 if (err || !decoded) {
                     return res.status(401)
-                        .json({message: 'Wrong token. Athentication error'});
+                        .json({message: 'token incorreto erro na autenticação'});
                 }
                 next();
             })
@@ -70,7 +70,7 @@ module.exports = {
                 UserModel.findById(id).lean().exec(function(err, user) {
                     if (err || !user) {
                         return res.status(500).json({
-                            message: 'Error when trying to fetch user data', error: err})
+                            message: 'erro no cruzamento dos dados', error: err})
                     }
                     let token = jwt.sign({_id: user._id}, consts.keyJWT,{expiresIn: consts.expiresJWT});
                     delete user.password;                        
