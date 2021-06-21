@@ -1,5 +1,4 @@
 var ProductModel = require("../models/ProductModel");
-var router = express.Router();
 
 module.exports = {
     all: function(req, res) {
